@@ -26,37 +26,37 @@ Style transfer relies on separating the content and style of an image. Given one
 the lower layers simply reproduce the exact pixel values of
 the original image. 
 Following above, **content features are extracted using conv4_2** for Vgg-19.  
-- The style representation are computed using correlations between the different features in different layers of the CNN. Gram Matrix is used to capture style representations. 
-Following above, **Style features are extracted using different Gram Matrix corresponding to each concolutional layer** for Vgg-19.  
-- 
+- The style representation are computed using correlations between the different features in different layers of the CNN. Gram Matrix is used to capture these style representations for different CNN layers (detects how strongly features in one feature map relate to other feature map from same CNN layer eg. common color). 
+Following above, **Style features are extracted using different Gram Matrix corresponding to each convolutional layer** for Vgg-19. 
+With co-relations from multiple CNN layers a multi-scale style representation of input image is obtained (captures large and small style features).  
+- The style representations are calculated as style image passes through the network at first convolutional layer in all 5 stacks i.e convx_1, where corelations at each layer are given using a gram matrix. 
+- Steps to generate gram matrix at each convolutional layer stack. 
+    - x,y  dimensions of feature maps are flattened thus (d,x,y) becomes (d,x*y)
+    - The above matrix is multiplied by its transpose to obtain gram matrix of dimension (d,d) for current convolutional layer stack. (this step keeps non localized information) 
 
+- For generating the target image using content and textual features, we change the target image until its content matches to content image and style matches to style image. Original target image is taken as the content image clone and trained until the loss is minimised. 
+- Two different losses used : 
+  - Content Loss :- Compares the content representation of content and target image using mean squared error. **Content representation is taken from conv4_2 layer of Vgg-19 for both images**
+  Target  
+  - Style Loss :- Computed using mean squared distance between gram matrices of style and target image at each layer (conv1_1,conv2_1,conv3_1,conv4_1,conv5_1) 
+  Separate weights for each layers used, a is a constant for number of values in each layer 
+  - Total Loss : Content Loss + Style Loss , It is used along with back propagation to iteratively change the target image to miniise the loss. 
 
+- Constant weights alpha and beta are used to balance out total loss over both losses. **Often the style weights are kept much larger** Weights are expressed as a ration alpha/beta which implies the smaller the ratio the more stylistic effect visible.   
 
-The 10 classes to predict are:
-- Safe driving 
-- Texting(right hand) 
-- Talking on the phone (right hand)
-- Texting (left hand) 
-- Talking on the phone (left hand)
-- Operating the radio 
-- Drinking 
-- Reaching behind 
-- Hair and makeup  
-- Talking to passenger(s). 
 
 <div align="center"><img src="plots/classes_imgs.jpg" height='200px'/></div>
 
 
-## Algorithm Used
+## Hyper Parameters 
 
-<div align="center"><img src="plots/pipeline.jpeg" /></div>
+- Style weights corresponding to each layer  
+- Content weight (alpha) 1 
+- Style weight (beta) 1e4
+- Epochs 5000 
 
-- Different combinations of feature sets were used shown in Fig 1(**Ugly Duckling Theorem**).
-- Evaluated with different classifiers, model parameters were varied using **Grid Search** to find the best parameters (**No Free Lunch Theorem**).
-- Deep learning methods CNN and ResNet-101 also used for classification and Performace visualised using Class Activation Maps (CAMs). 
-- In PCA, number of components were preserved using **Elbow method over variance of PCA projected data** (Fig. 2).
 
-## Evaluation Metrics and Results
+## Results
 
 Follwing are the results of the project:
 
@@ -103,22 +103,12 @@ Follwing are the results of the project:
                     Fig 6. ResNet-101 [Stratergy-2] performance measured using Class Activation Maps
 <div align="center"><img src="plots/class_activation_map.png"/></div>
 
-## Interpretation of Results
-
-
-- PCA gives better results compared to LDA and LDA over PCA 
-- AdaBoost performed poorly on all sets of data and proved to be a bad choice as data does not suffer from high variance. 
-- SVM on PCA projected feature set (HOG, LBP, Color Hist, SURF, GRAY, KAZE & RGB) gave the
-best metric scores because of the rich features and kernel tricks to classify data.
-- Among Deep Learning methods, ResNet-101 with stratery-2 i.e retrain last few layers gave best accuracy.
--  Feature Extration and Image Augumentation techniques helped in improving overall accuracy.
 
 ## References
 
-1. H. Eraqi, Y. Abouelnaga, M. Saad, and M. Moustafa, “Driver Distraction Identification with an Ensemble of Convolutional Neural Networks”, Journal of Advanced Transportation 2019, 1-12; doi: 10.1155/2019/4125865
-2. [Class Activation maps](https://snappishproductions.com/blog/2018/01/03/class-activation-mapping-in-pytorch.html.html)
-3. [Distracted Driver Detection using Deep Learning](https://medium.com/@sam.bell_43711/distracted-driver-detection-using-deep-learning-ecc7216ae8d0)
-4. [ML techniques for Distacted Driver Detection](http://cs229.stanford.edu/proj2019spr/report/24.pdf)
+1. [Image Style Transfer Using Convolutional Neural Networks by Gatys](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf). 
+2. [Udacity - Pytorch Nanodegree](https://www.udacity.com/course/deep-learning-pytorch--ud188)
+
 
 ## Project Team Members
 
