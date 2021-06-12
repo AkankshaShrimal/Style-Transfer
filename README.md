@@ -38,9 +38,9 @@ Style transfer relies on separating the content and style of an image. Given one
      <td>Present day in purple and selected day in pink</td>
   </tr>
   <tr>
-    <td><img src="Images/theory_images/style_transfer_1.png" width=270 height=480></td>
-    <td><img src="Images/theory_images/style_transfer_2.png" width=270 height=480></td>
-    <td><img src="Images/theory_images/style_transfer_3.png" width=270 height=480></td>
+    <td><img src="Images/theory_images/style_transfer_1.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/style_transfer_2.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/style_transfer_3.png" width=270 height=270></td>
   </tr>
  </table>                                     
 
