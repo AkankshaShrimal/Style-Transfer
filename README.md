@@ -12,12 +12,25 @@ Image Style Transfer requires two images **Content Image** from which objects an
 
 ## Detailed Steps and Explanation
 
-<div align="center"><img src="plots/classes_imgs.jpg" height='200px'/></div>
-
 Style transfer relies on separating the content and style of an image. Given one content image and one style image, we aim to create a new, target image which should contain our desired content and style components:
 - objects and their arrangement are similar to that of the content image
 - style, colors, and textures are similar to that of the style image
 - Used pre-trained VGG19 Net to extract content or style features from a passed in image 
+
+                                        Fig 1. Image Style Transfer Process
+   <div align="center"><img src="plots/Final_Feature_extraction.png" height='450px'/></div>  
+   <div class="row">
+  <div class="column">
+    <img src="Images/theory_images/style_transfer_1.png" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="Images/theory_images/style_transfer_2.png" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="Images/theory_images/style_transfer_3.png" alt="Mountains" style="width:100%">
+  </div>
+    </div>                                       
+
 
 
 ### Steps 
