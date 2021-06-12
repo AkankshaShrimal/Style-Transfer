@@ -29,7 +29,20 @@ Style transfer relies on separating the content and style of an image. Given one
   <div class="column">
     <img src="Images/theory_images/style_transfer_3.png" alt="Mountains" style="width:100%">
   </div>
-    </div>                                       
+    </div>  
+
+ <table>
+  <tr>
+    <td>First Screen Page</td>
+     <td>Holiday Mention</td>
+     <td>Present day in purple and selected day in pink</td>
+  </tr>
+  <tr>
+    <td><img src="Images/theory_images/style_transfer_1.png" width=270 height=480></td>
+    <td><img src="Images/theory_images/style_transfer_2.png" width=270 height=480></td>
+    <td><img src="Images/theory_images/style_transfer_3.png" width=270 height=480></td>
+  </tr>
+ </table>                                     
 
 
 
