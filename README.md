@@ -33,33 +33,63 @@ Style transfer relies on separating the content and style of an image. Given one
  </table>                                     
 
 
-
 ### Steps 
 - Content and Style features are extracted using **Vgg-19** convolutional and pooling layers so vgg19.classifier layers are discarded.  
-- According to [Gayts](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) the deeper layers of Convolutional Neural Networ capture the high-level content in terms of objects and their arrangement in the input image but do not constrain the exact pixel values of the reconstruction (per pixel colors, textures). In contrast, reconstructions from
-the lower layers simply reproduce the exact pixel values of
+- According to [Gayts](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) the deeper layers of Convolutional Neural Networ capture the high-level content in terms of objects and their arrangement in the input image but do not constrain the exact pixel values of the reconstruction (per pixel colors, textures). In contrast,lower layers simply reproduce the exact pixel values of
 the original image. 
-Following above, **content features are extracted using conv4_2** for Vgg-19.  
-- The style representation are computed using correlations between the different features in different layers of the CNN. Gram Matrix is used to capture these style representations for different CNN layers (detects how strongly features in one feature map relate to other feature map from same CNN layer eg. common color). 
-Following above, **Style features are extracted using different Gram Matrix corresponding to each convolutional layer** for Vgg-19. 
-With co-relations from multiple CNN layers a multi-scale style representation of input image is obtained (captures large and small style features).  
-- The style representations are calculated as style image passes through the network at first convolutional layer in all 5 stacks i.e convx_1, where corelations at each layer are given using a gram matrix. 
-- Steps to generate gram matrix at each convolutional layer stack. 
-    - x,y  dimensions of feature maps are flattened thus (d,x,y) becomes (d,x*y)
-    - The above matrix is multiplied by its transpose to obtain gram matrix of dimension (d,d) for current convolutional layer stack. (this step keeps non localized information) 
+Following above, **content features are extracted using conv4_2 layer of Vgg-19**.  
+- The style representation are computed using correlations between the different features in different layers of the CNN using Gram Matrix(It detects how strongly features in one feature map relate to other feature map from same CNN layer eg. common color). 
+With co-relations from multiple CNN layers a multi-scale style representation of input image is obtained.  
+Following above, **Style features are extracted using different Gram Matrix corresponding to each convolutional layer of Vgg-19**. 
 
-- For generating the target image using content and textual features, we change the target image until its content matches to content image and style matches to style image. Original target image is taken as the content image clone and trained until the loss is minimised. 
-- Two different losses used : 
-  - Content Loss :- Compares the content representation of content and target image using mean squared error. **Content representation is taken from conv4_2 layer of Vgg-19 for both images**
-  Target  
-  - Style Loss :- Computed using mean squared distance between gram matrices of style and target image at each layer (conv1_1,conv2_1,conv3_1,conv4_1,conv5_1) 
-  Separate weights for each layers used, a is a constant for number of values in each layer 
-  - Total Loss : Content Loss + Style Loss , It is used along with back propagation to iteratively change the target image to miniise the loss. 
+- The style representations are calculated as style image passes through the network at first convolutional layer in all 5 convolutional stacks i.e convx_1, where corelations at each layer are given using a gram matrix. 
+Steps to generate Gram Matrix at each convolutional layer stack are:  
+    - x,y  dimensions of feature maps are flattened thus (no_of_feature_maps,x,y) becomes (no_of_feature_maps,x*y).
+    - The above matrix is multiplied by its transpose to obtain Gram Matrix of dimension (no_of_feature_maps,no_of_feature_maps) for current convolutional layer stack. (this step keeps non localized information) 
+                                   Fig 2. Gram Matrix Generation 
 
-- Constant weights alpha and beta are used to balance out total loss over both losses. **Often the style weights are kept much larger** Weights are expressed as a ration alpha/beta which implies the smaller the ratio the more stylistic effect visible.   
+ <table>
+  <tr>
+    <td>5 Gram Matrices for Vgg-19</td>
+     <td>Flatenning feature maps</td>
+     <td>Constructing Gram Matrix</td>
+  </tr>
+  <tr>
+    <td><img src="Images/theory_images/vgg_19_gram_matrix_layers.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/gram_matrix_1.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/gram_matrix_2.png" width=270 height=270></td>
+  </tr>
+ </table> 
 
+- For generating the target image using content and style features, we change the target image until its content matches to content image and style matches to style image. Original target image is taken as the content image clone and trained until the loss is minimised. 
 
-<div align="center"><img src="plots/classes_imgs.jpg" height='200px'/></div>
+- Content and Style Loss: 
+    - **Content Loss** :- Compares the content representation of content and target image using mean squared error. **Content representation is taken from conv4_2 layer of Vgg-19 for both images**
+    
+    - **Style Loss** :- Computed using **mean squared distance between gram matrices of style and target image at each layer (conv1_1,conv2_1,conv3_1,conv4_1,conv5_1)** 
+    Separate weights for each layers used, a is a constant for number of values in each layer.
+
+    - **Total Loss** : **Content Loss + Style Loss** , It is used along with back propagation to iteratively change the target image to miniise the loss. 
+                                   Fig 3.Content and Style Loss
+
+ <table>
+  <tr>
+    <td>Content Loss</td>
+     <td>Style Loss</td>
+     <td>Total Loss</td>
+  </tr>
+  <tr>
+    <td><img src="Images/theory_images/content_loss_conv4_2.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/style_loss.png" width=270 height=270></td>
+    <td><img src="Images/theory_images/total_loss_1.png" width=270 height=270></td>
+  </tr>
+ </table>                                     
+
+- Constant weights 	\alpha and beta are used to balance out total loss over both losses. **Often the style weights are kept much larger** and weights are expressed as a **ratio alpha/beta which implies the smaller the ratio the more stylistic effect visible**.   
+
+                                   Fig 4. Content-style ratio
+
+<div align="center"><img src="Images/theory_images/total_loss_2.png" height='200px'/></div>
 
 
 ## Hyper Parameters 
@@ -74,48 +104,11 @@ With co-relations from multiple CNN layers a multi-scale style representation of
 
 Follwing are the results of the project:
 
-                                        Fig 1. Feature Visualization
-   <div align="center"><img src="plots/Final_Feature_extraction.png" height='450px'/></div>                                         
+                                        Fig 5. Image Style Transfer  
+   <div align="center"><img src="Images/output_images/plots1.png" /></div>                                         
 
-                                Fig 2. Variance of PCA projected over min-max normalized data
-<div align="center"><img src="plots/PCA_variance_graphs.png" height='500px'/></div>
-
-                                Fig 3 Receiver Operating Characteristic (ROC) Curves
-                                    a. ROC of PCA reduced data
-                                    b. ROC of LDA reduced data
-                                    c. ROC of LDA on PCA reduced data
-<div align="center">
-    <img src="plots/roc_over_pca.png" height='225px'/>
-    <img src="plots/roc_over_lda.png" height='225px'/>
-    <img src="plots/roc_over_lda_over_pca.png" height='225px'/>
-</div>
-
-                Fig 4. Optimal Parameters of classifiers after grid search
-<div align="center"><img src="plots/optimal_param.png" height='180px'/></div>
-
-     Fig 5. Comparing various classifiers with different feature sets over Accuracy/Recall/Precision/F1 score
-                                    a. Results of PCA reduced data
-                                    b. Results of LDA reduced data
-                                    c. Results of LDA on PCA reduced data
-         
-<div align="center"><img src="plots/results_pca.png" height='200px'/></div>
-<div align="center"><img src="plots/results_lda.png" height='200px'/></div>
-<div align="center"><img src="plots/results_lda_over_pca.png" height='200px'/></div>
-
-
-                                Fig 5. CNN architecture 
-<div align="center"><img src="plots/CNN_model.jpeg"/></div>
-
-
-        Fig 6. Comparing between deep learning classifiers with Accuracy/Recall/Precision/F1 score
-                                    a. CNN
-                                    b. ResNet-101 [Stratery-1 : Retrain only last layer]
-                                    c. ResNet-101 [Stratery-2 : Retrain last few layers]
-<div align="center"><img src="plots/results_deep_learning_classifiers.png" height='150px'/></div>
-
-
-                    Fig 6. ResNet-101 [Stratergy-2] performance measured using Class Activation Maps
-<div align="center"><img src="plots/class_activation_map.png"/></div>
+                                Fig 6. Image Style Transfer results
+<div align="center"><img src="Images/output_images/plots3.jpg" /></div>
 
 
 ## References
