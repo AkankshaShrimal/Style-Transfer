@@ -17,25 +17,13 @@ Style transfer relies on separating the content and style of an image. Given one
 - style, colors, and textures are similar to that of the style image
 - Used pre-trained VGG19 Net to extract content or style features from a passed in image 
 
-                                        Fig 1. Image Style Transfer Process
-   <div align="center"><img src="plots/Final_Feature_extraction.png" height='450px'/></div>  
-   <div class="row">
-  <div class="column">
-    <img src="Images/theory_images/style_transfer_1.png" alt="Snow" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="Images/theory_images/style_transfer_2.png" alt="Forest" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="Images/theory_images/style_transfer_3.png" alt="Mountains" style="width:100%">
-  </div>
-    </div>  
+                                   Fig 1. Image Style Transfer Process
 
  <table>
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
+    <td>Content Extraxtion from Content Image</td>
+     <td>Style Extraction from Style Image</td>
+     <td>Generating Target Image</td>
   </tr>
   <tr>
     <td><img src="Images/theory_images/style_transfer_1.png" width=270 height=270></td>
