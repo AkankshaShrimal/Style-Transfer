@@ -117,7 +117,9 @@ Following are the results of the project:
                                 
 <div align="center"><img src="Images/output_images/plots3.jpg" /></div>
 
-<img src="Images/output_images/my_image.gif" width="500" height="700">
+<div align="left"><img src="Images/output_images/my_image.gif" width="450" height="600"></div>
+
+
 
 ## References
 
