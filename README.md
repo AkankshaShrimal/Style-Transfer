@@ -8,7 +8,7 @@ Rendering the semantic content of an image in different
 styles is a difficult image processing task widely known as **Image Style Transfer**. In this project, I implemented Image Style Transfer using features extracted from pre-trained **VGG-19**. 
 Image Style Transfer requires two images **Content Image** from which objects and arrangements are extracted and **Style Image** from which style, colors and textures are etracted. Using objects from Content Image and colors and textures from Style Image a new **Target Image** is generated.   
 
-<div align="center"><img src="Images/output_images/plots1.jpg" height='200px'/></div>
+<div align="center"><img src="Images/output_images/plots2.jpg" height='200px'/></div>
 
 ## Detailed Steps and Explanation
 
@@ -17,7 +17,7 @@ Image Style Transfer requires two images **Content Image** from which objects an
 Style transfer relies on separating the content and style of an image. Given one content image and one style image, we aim to create a new, target image which should contain our desired content and style components:
 - objects and their arrangement are similar to that of the content image
 - style, colors, and textures are similar to that of the style image
-- Use pre-trained VGG19 Net to extract content or style features from a passed in image 
+- Used pre-trained VGG19 Net to extract content or style features from a passed in image 
 
 
 ### Steps 
