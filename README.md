@@ -5,10 +5,10 @@
 Implemented [Image Style Transfer Using Convolutional Neural Networks by Gatys](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf). 
 
 Rendering the semantic content of an image in different
-styles is a difficult image processing task widely known as Image Style Transfer. In this project, I implemented Image Style Transfer using features extracted from pre-trained **VGG-19**. 
-Image Style Transfer requires two images **Content Image** from which objects and arrangements are extracted and **Style Image** from which style, colors and textures are etracted. Using objects from Content Image and colors and textures from Style Image a new target image is generated.   
+styles is a difficult image processing task widely known as **Image Style Transfer**. In this project, I implemented Image Style Transfer using features extracted from pre-trained **VGG-19**. 
+Image Style Transfer requires two images **Content Image** from which objects and arrangements are extracted and **Style Image** from which style, colors and textures are etracted. Using objects from Content Image and colors and textures from Style Image a new **Target Image** is generated.   
 
-<div align="center"><img src="plots/classes_imgs.jpg" height='200px'/></div>
+<div align="center"><img src="Images/output_images/plots1.jpg" height='200px'/></div>
 
 ## Detailed Steps and Explanation
 
