@@ -97,11 +97,11 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
 - Style weights corresponding to each layer  
                                    Fig 5. Layer wise style weights
 
-<div align="center"><img src="Images/theory_images/style_weights.png" height='100px'/></div>
+<div align="center"><img src="Images/theory_images/style_weights.png" height='200px'/></div>
 - Content weight, Style weight and Number of epochs
                                    Fig 6. Other Hyper Parameters
 
-<div align="center"><img src="Images/theory_images/hyper_parameters.png" height='100px'/></div>
+<div align="center"><img src="Images/theory_images/hyper_parameters.png" height='200px'/></div>
 
 
 ## Results
