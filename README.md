@@ -85,7 +85,7 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
   </tr>
  </table>                                     
 
-- Constant weights 	\alpha and beta are used to balance out total loss over both losses. **Often the style weights are kept much larger** and weights are expressed as a **ratio alpha/beta which implies the smaller the ratio the more stylistic effect visible**.   
+- Constant weights alpha and beta are used to balance out total loss over both losses. **Often the style weights are kept much larger** and weights are expressed as a **ratio alpha/beta which implies the smaller the ratio the more stylistic effect visible**.   
 
                                    Fig 4. Content-style ratio
 
