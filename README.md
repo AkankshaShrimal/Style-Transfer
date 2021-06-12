@@ -17,6 +17,7 @@ Style transfer relies on separating the content and style of an image. Given one
 - style, colors, and textures are similar to that of the style image
 - Used pre-trained VGG19 Net to extract content or style features from a passed in image 
 
+
                                    Fig 1. Image Style Transfer Process
 
  <table>
@@ -45,7 +46,9 @@ Following above, **Style features are extracted using different Gram Matrix corr
 - The style representations are calculated as style image passes through the network at first convolutional layer in all 5 convolutional stacks i.e convx_1, where correlations at each layer are given using a gram matrix. 
 Steps to generate Gram Matrix at each convolutional layer stack are:  
     - x,y  dimensions of feature maps are flattened thus (no_of_feature_maps,x,y) becomes (no_of_feature_maps,x*y).
-    - The above matrix is multiplied by its transpose to obtain Gram Matrix of dimension (no_of_feature_maps,no_of_feature_maps) for current convolutional layer stack. (this step keeps non localized information) 
+    - The above matrix is multiplied by its transpose to obtain Gram Matrix of dimension (no_of_feature_maps,no_of_feature_maps) for current convolutional layer stack. (this step keeps non localized information)
+
+
                                    Fig 2. Gram Matrix Generation 
 
  <table>
@@ -70,6 +73,8 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
     Separate weights for each layers used, a is a constant for number of values in each layer.
 
     - **Total Loss** : **Content Loss + Style Loss** , It is used along with back propagation to iteratively change the target image to minimize the loss. 
+
+
                                    Fig 3. Content and Style Loss
 
  <table>
@@ -96,11 +101,13 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
 
 - Style weights corresponding to each layer  
 
+
                                    Fig 5. Layer wise style weights
 
 <div align="center"><img src="Images/theory_images/style_weights.png" height='200px'/></div>
 
 - Content weight, Style weight and Number of epochs
+
 
                                    Fig 6. Other Hyper Parameters
 
@@ -110,6 +117,7 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
 ## Results
 
 Following are the results of the project:
+
 
                                         Fig 7. Image Style Transfer  
    <div align="center"><img src="Images/output_images/plots1.png" /></div>                                         
