@@ -113,6 +113,16 @@ Steps to generate Gram Matrix at each convolutional layer stack are:
 
 <div align="center"><img src="Images/theory_images/hyper_parameters.png" height='150px'/></div>
 
+## Usage 
+
+- Function **apply_style_transfer** takes input path of content and style images and performs style transfer from style to content image and returns content,style and target images respectively.
+- All kind of images are acceptable for content and style image (.png,.jpg etc) 
+
+
+```
+content_image,style_image,target_image = apply_style_transfer(content_image_path, style_image_path) 
+
+```
 
 ## Results
 
